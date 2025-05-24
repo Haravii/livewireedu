@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('username');
-            $table->boolean('is_admin');
+        Schema::create('statuses', function (Blueprint $table) {
+            $table->id();
+            $table->string('status_name');
+            $table->timestamps();
+            $table->softDeletes('deleted_at', precision: 0);
         });
     }
 
@@ -22,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('statuses');
     }
 };
