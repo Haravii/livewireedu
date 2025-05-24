@@ -9,6 +9,7 @@ Route::get('/', [UserController::class, 'index'])->name('index');
 Route::get('/auth', [UserController::class, 'authPage'])->name('authPage');
 
 Route::post('/authUser', [UserController::class, 'authUser'])->name('authUser');
+Route::get('/logoutUser', [UserController::class, 'logoutUser'])->name('logoutUser');
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('index');

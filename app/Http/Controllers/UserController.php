@@ -14,6 +14,17 @@ class UserController extends Controller
         ]);
     }
 
+    public function logoutUser()
+    {
+        auth()->logout();
+ 
+        request()->session()->invalidate();
+ 
+        request()->session()->regenerateToken();
+
+        return redirect()->route('index');
+    }
+
     public function authUser()
     {
         if (auth()->attempt(['email' => request('email'), 'password' => request('password')]))
