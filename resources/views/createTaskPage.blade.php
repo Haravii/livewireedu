@@ -19,12 +19,10 @@
         <div class="mb-3">
             <label for="description" class="form-label">Статус задачи</label>
             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="statusId" id="btnradio1" autocomplete="off" value="1" checked>
-                <label class="btn btn-outline-primary" for="btnradio1">1</label>
-
-                <input type="radio" class="btn-check" name="statusId" id="btnradio2" value="2" autocomplete="off">
-                <label class="btn btn-outline-primary" for="btnradio2">2</label>
-                {{--  --}}
+                @foreach ($statuses as $status)
+                    <input type="radio" class="btn-check" name="statusId" id="btnradio{{ $status->id }}" autocomplete="off" value="{{ $status->id }}" checked>
+                    <label class="btn btn-outline-primary" for="btnradio{{ $status->id }}">{{ $status->status_name }}</label>
+                @endforeach
             </div>
         </div>
             <button type="submit" class="btn btn-primary">Создать</button>

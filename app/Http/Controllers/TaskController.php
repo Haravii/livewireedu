@@ -10,8 +10,11 @@ class TaskController extends Controller
 {
     public function newTask()
     {
+        $statuses = Status::get();
+
         return view('createTaskPage', [
-            'title' => 'Создание задачи'
+            'title' => 'Создание задачи',
+            'statuses' => $statuses
         ]);
     }
 
