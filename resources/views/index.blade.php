@@ -7,9 +7,9 @@
 @auth
  <a class="btn btn-danger" href="{{ route('logoutUser') }}" role="button">Выйти</a>
 
-<div class="overflow-hidden text-center w-75">
-  
-    <div class="card mb-3">
+<div class="overflow-hidden w-75 mx-auto justify-content-md-end">
+  <div class="text-end"><a href="{{ route('newTask') }}" class="btn btn-primary text-end mb-3">Новая задача<a></div>
+    <div class="card mb-3 text-center">
         <h5 class="card-header">Задачи</h5>
         <div class="card-body">
             <div class="card-text">

@@ -17,6 +17,13 @@ class AdminController extends Controller
         ]);
     }
 
+    public function register()
+    {
+        return view('admin.registerUser', [
+            'title' => 'Создание пользователя'
+        ]);
+    }
+
     public function registerUser()
     {
         $validatedData = request()->validate([
@@ -31,7 +38,7 @@ class AdminController extends Controller
         $user->name = $validatedData['name'];
         $user->email = $validatedData['email'];
         $user->password = $hashed;
-        if (isset(request()->is_admin))
+        if (isset(request()->isAdmin))
         {
             $user->is_admin = 1;
         }
