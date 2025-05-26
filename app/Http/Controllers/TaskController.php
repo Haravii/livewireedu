@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Task;
+use App\Models\Status;
 
 class TaskController extends Controller
 {
@@ -12,6 +13,24 @@ class TaskController extends Controller
         return view('createTaskPage', [
             'title' => 'Создание задачи'
         ]);
+    }
+
+    public function newStatus()
+    {
+        return view('admin.createStatusPage', [
+            'title' => 'Создание Статуса'
+        ]);
+    }
+
+    public function createNewStatus()
+    {
+        $status = new Status;
+
+        $status->status_name = request()->name;
+
+        $status->save();
+
+        return redirect()->route('admin.newStatus');
     }
 
     public function createNewTask() // userId title description statusId
