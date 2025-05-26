@@ -12,6 +12,8 @@ Route::get('/logoutUser', [UserController::class, 'logoutUser'])->name('logoutUs
 
 Route::get('/newTask', [TaskController::class, 'newTask'])->name('newTask');
 
+Route::get('/deleteTask', [TaskController::class, 'deleteTask'])->name('deleteTask');
+Route::get('/changeTaskStatus', [TaskController::class, 'changeTaskStatus'])->name('changeTaskStatus');
 Route::post('/createNewTask', [TaskController::class, 'createNewTask'])->name('createNewTask');
 Route::post('/authUser', [UserController::class, 'authUser'])->name('authUser');
 

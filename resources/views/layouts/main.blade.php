@@ -29,7 +29,7 @@
                     <a class="nav-link" aria-current="page" href="{{ route('admin.index') }}">Пользователи</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{ route('admin.newStatus') }}">Пользователи</a>
+                    <a class="nav-link" aria-current="page" href="{{ route('admin.newStatus') }}">Создать статус</a>
                 </li>
               @endif
               @endauth

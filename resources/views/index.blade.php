@@ -14,18 +14,29 @@
         <div class="card-body">
             <div class="card-text">
                 <div class="row gy-4 gx-0">
-    @for ($i = 0; $i < 5; $i++)
+    @foreach ($tasks as $task)
+
     <div class="col-6">
       <div class="card mb-3" style="width: 20rem;">
             <div class="card-body">
-                <a href="#" class="btn-close position-absolute top-0 end-0"></a>
-                <h5 class="card-title">Доделать сайт</h5>
-                <p class="card-text">Надо</p>
-                <a href="#" class="btn btn-primary">Завершить</a>
+                <a href="{{ route('deleteTask', ['taskId' => $task->id]) }}" class="btn-close position-absolute top-0 end-0"></a>
+                <h5 class="card-title">{{ $task->title }}</h5>
+                <p class="card-text">{{ $task->description ?? '' }}</p>
+                <div class="dropdown">
+                     <button class="btn btn-secondary dropdown-toggle {{ $task->status->btn_color }}" type="button" data-bs-toggle="dropdown" aria-expanded="false"> 
+                        {{ $task->status->status_name }}
+                    </button>
+                    <ul class="dropdown-menu">
+                        @foreach ($statuses as $status)
+                        <li><a class="dropdown-item" href="{{ route('changeTaskStatus', ['taskId' => $task->id, 'statusId' => $status->id]) }}">{{ $status->status_name }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
        </div>
     </div>
-    @endfor
+
+    @endforeach
 </div>
 </div>
     </div>

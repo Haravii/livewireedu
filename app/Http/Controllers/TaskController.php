@@ -7,7 +7,30 @@ use App\Models\Task;
 use App\Models\Status;
 
 class TaskController extends Controller
-{
+{   
+
+    public function deleteTask()
+    {
+        $delete = Task::find(request()->taskId);
+
+        $delete->delete();
+
+        $delete->trashed();
+
+        return redirect()->route('index'); 
+    }
+
+    public function changeTaskStatus() // taskId statusId
+    {
+        $task = Task::find(request()->taskId);
+
+        $task->status()->associate(request()->statusId);
+
+        $task->save();
+
+        return redirect()->route('index');
+    }
+
     public function newTask()
     {
         $statuses = Status::get();
@@ -30,6 +53,7 @@ class TaskController extends Controller
         $status = new Status;
 
         $status->status_name = request()->name;
+        $status->btn_color = request()->btnColor;
 
         $status->save();
 

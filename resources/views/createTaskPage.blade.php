@@ -21,10 +21,11 @@
             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                 @foreach ($statuses as $status)
                     <input type="radio" class="btn-check" name="statusId" id="btnradio{{ $status->id }}" autocomplete="off" value="{{ $status->id }}" checked>
-                    <label class="btn btn-outline-primary" for="btnradio{{ $status->id }}">{{ $status->status_name }}</label>
+                    <label class="btn {{ $status->btn_color }}" for="btnradio{{ $status->id }}">{{ $status->status_name }}</label>
                 @endforeach
             </div>
         </div>
+
             <button type="submit" class="btn btn-primary">Создать</button>
     </form>
 </div>

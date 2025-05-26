@@ -4,13 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Task;
+use App\Models\Status;
 
 class UserController extends Controller
 {
+
     public function index()
     {
+        $statuses = Status::get();
+        $tasks = Task::get();
         return view('index', [
-            'title' => 'Главная страница'
+            'title' => 'Главная страница',
+            'tasks' => $tasks,
+            'statuses' => $statuses
         ]);
     }
 
@@ -33,12 +40,5 @@ class UserController extends Controller
         }
         return redirect()->route('authPage');;
         
-    }
-
-    public function authPage()
-    {
-        return view('auth', [
-            'title' => 'Авторизация'
-        ]);
     }
 }
