@@ -8,9 +8,12 @@
     <form method="post" action="{{ route('admin.createNewStatus') }}">
         @csrf
         <div class="mb-3">
-            <label for="title" class="form-label">Название статуса</label>
-            <input type="text" class="form-control" id="title" name="name">
+            <label for="name" class="form-label">Название статуса</label>
+            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name">
         </div>
+        @error('name')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
 
         <div class="mb-3">
             <label for="description" class="form-label">Цвет</label>

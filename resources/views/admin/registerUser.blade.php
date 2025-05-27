@@ -10,17 +10,26 @@
 
         <div class="mb-3">
             <label for="name" class="form-label">Имя пользователя</label>
-            <input type="text" class="form-control" id="name" name="name">
+            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name">
         </div>
+        @error('name')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email">
+            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email">
         </div>
+        @error('email')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <div class="mb-3">
             <label for="password" class="form-label">Пароль</label>
-            <input type="password" class="form-control" id="password" aria-describedby="passwordHelp" name="password">
+            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" aria-describedby="passwordHelp" name="password">
         <div id="passwordHelp" class="form-text">Минимум 8 символов.</div>
         </div>
+        @error('password')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <div class="mb-3">
             <label for="password_confirmation" class="form-label">Подтверждение пароля</label>
             <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">

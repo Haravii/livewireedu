@@ -11,8 +11,11 @@
         <input type="hidden" name="admin" value="true">
         <div class="mb-3">
             <label for="title" class="form-label">Название задачи</label>
-            <input type="text" class="form-control" id="title" name="title">
+            <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title">
         </div>
+        @error('title')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <div class="mb-3">
             <label for="description" class="form-label">Опиание задачи(не обязательно)</label>
             <textarea class="form-control" id="description" name="description"></textarea>

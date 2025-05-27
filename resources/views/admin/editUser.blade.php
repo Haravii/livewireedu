@@ -10,12 +10,18 @@
         <input type="hidden" name="userId" value="{{ $user->id }}">
         <div class="mb-3">
             <label for="title" class="form-label">Имя пользователя</label>
-            <input type="text" class="form-control" id="title" name="name" value="{{ $user->name }}">
+            <input type="text" class="form-control @error('name') is-invalid @enderror" id="title" name="name" value="{{ $user->name }}">
         </div>
+        @error('name')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}">
+            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ $user->email }}">
         </div>
+        @error('email')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <br class="mb-3">
         <div class="mb-3">
             <label for="oldPassword" class="form-label">Cтарый пароль</label>

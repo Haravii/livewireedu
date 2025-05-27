@@ -5,7 +5,7 @@
 @section('content')
 
 @auth
- <a class="btn btn-danger" href="{{ route('logoutUser') }}" role="button">Выйти</a>
+ <span class="h4">Пользователь {{ auth()->user()->name }}<span> <a class="btn btn-danger" href="{{ route('logoutUser') }}" role="button">Выйти</a> 
 
 <div class="overflow-hidden w-75 mx-auto justify-content-md-end">
   <div class="text-end"><a href="{{ route('newTask') }}" class="btn btn-primary text-end mb-3">Новая задача<a></div>
@@ -51,12 +51,18 @@
         @csrf
     <div class="mb-3">
         <label for="InputEmail" class="form-label">Email</label>
-        <input type="email" class="shadow-sm form-control" id="InputEmail" aria-describedby="emailHelp" name="email" required>
+        <input type="email" class="shadow-sm form-control @error('email') is-invalid @enderror" id="InputEmail" aria-describedby="emailHelp" name="email" required>
     </div>
+    @error('email')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
     <div class="mb-3">
         <label for="InputPassword" class="form-label">Пароль</label>
-        <input type="password" class="shadow-sm form-control" id="InputPassword" name="password" required>
+        <input type="password" class="shadow-sm form-control @error('password') is-invalid @enderror" id="InputPassword" name="password" required>
     </div>
+    @error('password')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
     <button type="submit" class="w-100 shadow-sm btn btn-primary ">Войти</button>
     </form>
 @endguest
