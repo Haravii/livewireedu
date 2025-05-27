@@ -14,10 +14,10 @@
     <div class="card-text">
         <ul class="list-group">
             @foreach ($users as $user)
-                <li class="list-group-item mb-2">{{ $user->name }} ||
+                <li class="list-group-item mb-2">{{ $user->name }}  || 
                   {{ $user->email }}
                     <div class="text-end">
-                    <a href="" class="btn btn-primary text-end">Задачи<a>
+                    <a href="{{ route('admin.usersTasks', ['userId' => $user->id]) }}" class="btn btn-primary text-end">Задачи<a>
                     <a href="" class="btn btn-primary text-end">Редактировать<a>
                     <a href="" class="btn btn-danger text-end">Удалить<a></div>
                 </li>

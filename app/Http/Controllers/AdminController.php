@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Password;
 use App\Models\User;
+use App\Models\Status;
 
 
 class AdminController extends Controller
@@ -47,12 +48,45 @@ class AdminController extends Controller
         
         $user->save();
 
-        // if(auth()->user()->is_admin)
-        //     {
-        //         auth()->guard('admin');
-        //     }
-
         return redirect()->route('admin.index');
+    }
+
+    public function usersTasks()
+    {
+        $validatedData = request()->validate([
+            'userId' => ['required', 'integer']
+        ]);
+        if($user = User::find($validatedData['userId']))
+        {
+            $statuses = Status::get();
+            return view('admin.usersTasks', [
+            'title' => 'Задачи пользователя',
+            'user' => $user,
+            'statuses' => $statuses
+            ]);
+        }
+        return redirect()->back();
+    }
+
+    public function newTask()
+    {
+        $validatedData = request()->validate([
+            'userId' => ['required', 'integer']
+        ]);
+        $statuses = Status::get();
+
+        $userId = $validatedData['userId'];
+
+        return view('admin.createTaskPage', [
+            'title' => 'Создание задачи для пользователя '. User::find($userId)->name,
+            'statuses' => $statuses,
+            'userId' => $userId
+        ]);
+    }
+
+    public function editUser($id)
+    {
+        
     }
 }
 

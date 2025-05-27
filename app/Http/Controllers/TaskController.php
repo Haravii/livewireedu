@@ -8,7 +8,6 @@ use App\Models\Status;
 
 class TaskController extends Controller
 {   
-
     public function deleteTask()
     {
         $delete = Task::find(request()->taskId);
@@ -17,7 +16,7 @@ class TaskController extends Controller
 
         $delete->trashed();
 
-        return redirect()->route('index'); 
+        return redirect()->back();
     }
 
     public function changeTaskStatus() // taskId statusId
@@ -28,7 +27,7 @@ class TaskController extends Controller
 
         $task->save();
 
-        return redirect()->route('index');
+        return redirect()->back();
     }
 
     public function newTask()
@@ -63,20 +62,26 @@ class TaskController extends Controller
     public function createNewTask() // userId title description statusId
     {
         $validatedData = request()->validate([
-            'userId' => ['required'],
+            'userId' => ['required', 'integer'],
             'title' => ['required'],
             'statusId' => ['required'],
         ]);
 
         $task = new Task;
 
-        $task->user()->associate(request()->userId);
+        $userId = $validatedData['userId'];
+
+        $task->user()->associate($userId);
         $task->title = $validatedData['title'];
         $task->description = request()->description;
         $task->status_id = $validatedData['statusId'];
 
         $task->save();
 
+        if (isset(request()->admin))
+        {
+            return redirect()->route('admin.usersTasks', ['userId' => $userId]);
+        }
         return redirect()->route('index');
     }
 }

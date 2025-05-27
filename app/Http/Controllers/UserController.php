@@ -36,10 +36,6 @@ class UserController extends Controller
     {
         if (auth()->attempt(['email' => request('email'), 'password' => request('password')]))
         {
-            if (auth()->user()->is_admin)
-            {
-                auth('admin');
-            }
             return redirect()->route('index');
         }
         return redirect()->route('authPage');;
