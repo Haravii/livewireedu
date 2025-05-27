@@ -49,9 +49,13 @@ class TaskController extends Controller
 
     public function createNewStatus()
     {
+        $validation = request()->validate([
+            'name' => 'required'
+        ]);
+        
         $status = new Status;
 
-        $status->status_name = request()->name;
+        $status->status_name = $validation['name'];
         $status->btn_color = request()->btnColor;
 
         $status->save();
