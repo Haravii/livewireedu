@@ -86,7 +86,52 @@ class AdminController extends Controller
 
     public function editUser($id)
     {
-        
+        $user = User::find($id);
+
+        $username = $user->name;
+
+        return view('admin.editUser', [
+            'title' => 'Редактирование пользователя '. $username,
+            'userId' => $user->id,
+            'username' => $username,
+            'email' => $user->email
+        ]);
+    }
+
+    public function editUserStore() // userId name email old_password password password_confirmation
+    {
+        $userId = request()->userId;
+        $user = User::find($userId);
+
+        if (request()->name != $user->name)
+        {
+            $valid = request()->validate([
+                'name' => 'required'
+            ]);
+            $user->name = $valid['name'];
+        }
+
+        if (request()->email != $user->email)
+        {
+            $valid = request()->validate([
+                'email' => ['required', 'unique:users', 'email'],
+            ]);
+            $user->email = $valid['email'];
+        }
+
+        if (isset(request()->password))
+        {
+            $validatedData = request()->validate([
+            'oldPassword' => 'current_password:web',
+            'password' => ['required', Password::min(8), "confirmed"]
+            ]);
+
+            $user->password = bcrypt($validatedData['password']);
+        }
+
+        $user->save();
+
+        return redirect()->route('admin.editUser', $userId);
     }
 }
 

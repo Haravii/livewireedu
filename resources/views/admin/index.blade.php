@@ -18,7 +18,7 @@
                   {{ $user->email }}
                     <div class="text-end">
                     <a href="{{ route('admin.usersTasks', ['userId' => $user->id]) }}" class="btn btn-primary text-end">Задачи<a>
-                    <a href="" class="btn btn-primary text-end">Редактировать<a>
+                    <a href="{{ route('admin.editUser', $user->id) }}" class="btn btn-primary text-end">Редактировать<a>
                     <a href="" class="btn btn-danger text-end">Удалить<a></div>
                 </li>
             @endforeach
