@@ -12,8 +12,10 @@ class AdminController extends Controller
 
     public function index()
     {
+        $users = User::get();
         return view('admin.index', [
-            'title' => 'Админская страница'
+            'title' => 'Админская страница',
+            'users' => $users
         ]);
     }
 
@@ -45,6 +47,12 @@ class AdminController extends Controller
         
         $user->save();
 
+        // if(auth()->user()->is_admin)
+        //     {
+        //         auth()->guard('admin');
+        //     }
+
         return redirect()->route('admin.index');
     }
 }
+

@@ -13,14 +13,15 @@
   <div class="card-body">
     <div class="card-text">
         <ul class="list-group">
-            @for ($i = 1; $i < 10; $i++)
-                <li class="list-group-item mb-2">Пользователь {{ $i }}
+            @foreach ($users as $user)
+                <li class="list-group-item mb-2">{{ $user->name }} ||
+                  {{ $user->email }}
                     <div class="text-end">
                     <a href="" class="btn btn-primary text-end">Задачи<a>
                     <a href="" class="btn btn-primary text-end">Редактировать<a>
                     <a href="" class="btn btn-danger text-end">Удалить<a></div>
                 </li>
-            @endfor
+            @endforeach
         </ul>
     </div>
   </div>
