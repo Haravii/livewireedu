@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Task;
 use App\Models\Status;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -34,7 +35,16 @@ class UserController extends Controller
 
     public function authUser()
     {
-        if (auth()->attempt(['email' => request('email'), 'password' => request('password')]))
+        $validation = request()->validate([
+            'email' => [
+                'required', 
+                'email',
+                'exists:users,email'
+            ],
+            'password' => ['required']
+        ]);
+   
+        if (auth()->attempt(['email' => $validation['email'], 'password' => $validation['password']]))
         {
         }
         return redirect()->route('index');
