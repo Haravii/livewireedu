@@ -7,14 +7,14 @@
     <h2 class="mb-3">{{ $title ?? 'test title' }}</h2>
     <form method="post" action="{{ route('admin.editUserPOST') }}">
         @csrf
-        <input type="hidden" name="userId" value="{{ $userId }}">
+        <input type="hidden" name="userId" value="{{ $user->id }}">
         <div class="mb-3">
             <label for="title" class="form-label">Имя пользователя</label>
-            <input type="text" class="form-control" id="title" name="name" value="{{ $username }}">
+            <input type="text" class="form-control" id="title" name="name" value="{{ $user->name }}">
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" value="{{ $email }}">
+            <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}">
         </div>
         <br class="mb-3">
         <div class="mb-3">
@@ -35,6 +35,11 @@
         <div class="mb-3">
             <label for="password_confirmation" class="form-label">Подтверждение пароля</label>
             <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+        </div>
+
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="Check" name="isAdmin" value="1" @if ($user->is_admin) checked="checked" @endif>
+            <label class="form-check-label" for="Check">Может просматривать задачи других пользователей</label>
         </div>
             <button type="submit" class="btn btn-primary">Создать</button>
     </form>

@@ -88,17 +88,13 @@ class AdminController extends Controller
     {
         $user = User::find($id);
 
-        $username = $user->name;
-
         return view('admin.editUser', [
-            'title' => 'Редактирование пользователя '. $username,
-            'userId' => $user->id,
-            'username' => $username,
-            'email' => $user->email
+            'title' => 'Редактирование пользователя '. $user->name,
+            'user' => $user
         ]);
     }
 
-    public function editUserStore() // userId name email old_password password password_confirmation
+    public function editUserStore() // userId name email old_password password password_confirmation isAdmin
     {
         $userId = request()->userId;
         $user = User::find($userId);
@@ -127,6 +123,15 @@ class AdminController extends Controller
             ]);
 
             $user->password = bcrypt($validatedData['password']);
+        }
+
+        if (isset(request()->isAdmin))
+        {
+            $user->is_admin = 1;
+        }
+        else
+        {
+            $user->is_admin = 0;
         }
 
         $user->save();
