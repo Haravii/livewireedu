@@ -133,5 +133,16 @@ class AdminController extends Controller
 
         return redirect()->route('admin.editUser', $userId);
     }
+
+    public function deleteUser()
+    {
+        $delete = User::find(request()->userId);
+
+        $delete->delete();
+
+        $delete->trashed();
+
+        return redirect()->back();
+    }
 }
 

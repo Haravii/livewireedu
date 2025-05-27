@@ -24,6 +24,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/newTask', [AdminController::class, 'newTask'])->name('newTask')->middleware('auth');
     Route::get('/editUser/{id}', [AdminController::class, 'editUser'])->name('editUser')->middleware('auth');
 
+    Route::get('/deleteUser', [AdminController::class, 'deleteUser'])->name('deleteUser')->middleware('auth');
     Route::post('/editUser', [AdminController::class, 'editUserStore'])->name('editUserPOST')->middleware('auth');
     Route::post('/createNewStatus', [TaskController::class, 'createNewStatus'])->name('createNewStatus')->middleware('auth');
     Route::post('/registerUser', [AdminController::class, 'registerUser'])->name('registerUser')->middleware('auth');
