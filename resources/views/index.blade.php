@@ -23,7 +23,7 @@
                 <h5 class="card-title">{{ $task->title }}</h5>
                 <p class="card-text">{{ $task->description ?? '' }}</p>
                 <div class="dropdown">
-                     <button class="btn btn-secondary dropdown-toggle {{ $task->status->btn_color }}" type="button" data-bs-toggle="dropdown" aria-expanded="false"> 
+                     <button class="btn dropdown-toggle {{ $task->status->btn_color }}" type="button" data-bs-toggle="dropdown" aria-expanded="false"> 
                         {{ $task->status->status_name }}
                     </button>
                     <ul class="dropdown-menu">
