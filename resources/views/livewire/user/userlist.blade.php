@@ -1,21 +1,22 @@
-<div>
-    <h1>{{ $title }}</h1>
+<div class="row">
 
-    <input type="text" placeholder="Пусто..." wire:model.live="name">
-    <input type="text" placeholder="Пусто..." wire:model.live="lastName">
+    <div class="col-md-6">
 
-    <p>Name: {{$name}}</p>
-    <p>Lastname: {{$lastName}}</p>
-    <p>FullName: {{$fullName}}</p>
-
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" wire:model="user">
-        <button class="btn btn-primary" wire:click="add">Добавить</button>
+        <form wire:submit="addUser">
+        <input type="text" class="form-control" wire:model="username" wire:keydown.enter="addUser">
+        <button type="submit" class="btn btn-primary my-2">Добавить</button>
+        </form>
     </div>
 
-    <ul>
-        @foreach($users as $user)
-            <li>{{ $user }}</li>
-        @endforeach  
-    </ul>    
+    <div class="col-md-6">
+        <ul>
+            @forelse ($users as $user)
+                <li>{{ $user }}</li>
+            @empty
+                <p>Тут пусто...</p>
+            @endforelse
+        </ul>    
+        
+    </div>
+
 </div>

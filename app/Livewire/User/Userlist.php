@@ -6,22 +6,16 @@ use Livewire\Component;
 
 class Userlist extends Component
 {
-    public string $name = 'Захар';
-    public string $lastName;
-    public string $fullName;
     public string $title;
-    public $users = ["User 1", "User 2", "User 3"];
-    public string $user;
 
-    public function add()
-    {
-        $this->users[] = $this->user;
-    }
+    public string $username; 
 
-    public function mount($lastName)
+    public array $users = [];
+
+    public function addUser()
     {
-        $this->lastName = $lastName;
-        $this->fullName = $this->name . ' ' . $lastName;
+        $this->users[] = $this->username;
+        $this->reset(['username']);
     }
 
     public function render()

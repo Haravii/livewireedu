@@ -28,7 +28,7 @@
 @endphp
 
 <div class="container my-5">
-    @livewire("user.user-list", ['lastName' => "Архипов", 'title' => $title])
+    @livewire("user.user-list", ['title' => $title])
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
