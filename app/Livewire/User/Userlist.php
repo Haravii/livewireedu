@@ -2,25 +2,46 @@
 
 namespace App\Livewire\User;
 
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 use App\Models\User;
 
 class Userlist extends Component
 {
+    #[Validate('required')]
+    #[Validate('min:2', as: 'ЖОПА')]
+    #[Validate('max:30')]
+        public string $name;
 
-    public string $name; 
-    public string $email;
-    public string $password;
+    #[Validate('required|email|max:30')]
+        public string $email;
 
+    #[Validate('required|min:6')]
+        public string $password;
+
+    
+    // protected function rules(): array
+    // {
+    //     return [
+    //         'name' => 'required|min:2|max:30', 
+    //         'email' => 'required|email|max:30',
+    //         'password' => 'required|min:6'
+    //     ];
+    // }
+
+    protected function messages()
+    {
+        return [
+            'name.required' => 'ИМЕЧКО ТА ОБЯЗАТЕЛЬНО'
+        ];
+    }
 
     public function addUser()
     {
-        User::create([
-            'name' => $this->name,
-            'email' => $this->email,
-            'password' => $this->password,
-        ]);
-        $this->reset(['name', 'email', 'password']);
+        $validated = $this->validate();
+
+        User::create($validated);
+        $this->reset();
     }
 
     public function deleteUser(int $id)

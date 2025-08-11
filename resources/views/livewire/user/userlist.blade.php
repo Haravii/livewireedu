@@ -4,13 +4,16 @@
 
         <form wire:submit="addUser">
         <div class="mb-3">
-            <input type="text" name="name" class="form-control" wire:model="name" wire:keydown.enter="addUser" placeholder="Имя">
+            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" wire:model.blur="name" wire:keydown.enter="addUser" placeholder="Имя">
+            @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
         <div class="mb-3">
-            <input type="email" class="form-control" wire:model="email" wire:keydown.enter="addUser" placeholder="Email">
+            <input type="email" class="form-control @error('email') is-invalid @enderror" wire:model.blur="email" wire:keydown.enter="addUser" placeholder="Email">
+            @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
         <div class="mb-3">
-            <input type="password" class="form-control" wire:model="password" wire:keydown.enter="addUser" placeholder="Пароль">
+            <input type="password" class="form-control @error('password') is-invalid @enderror" wire:model.blur="password" wire:keydown.enter="addUser" placeholder="Пароль">
+            @error('password') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
         <div class="d-flex align-items-center gap-3">
             <button type="submit" class="btn btn-primary my-2">Добавить</button>
@@ -23,12 +26,6 @@
 
     <div class="col-md-6">
 
-        <div class="d-flex align-items-center gap-3">
-            <button wire:click="$refresh" class="btn btn-success">Обновить</button>
-            <div class="spinner-border text-success" role="status" wire:loading>
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        </div>
 
         <ul>
             @forelse ($users as $user)
