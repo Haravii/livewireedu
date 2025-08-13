@@ -23,12 +23,11 @@
   </div>
 </nav>
 
-@php
-    $title = "НАзвание страницы пользователей";
-@endphp
-
 <div class="container my-5">
-    @livewire("user.user-list", ['title' => $title])
+  <div class="row">
+    @livewire("user.user-create")
+    @livewire("user.user-list")
+  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
