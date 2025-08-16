@@ -1,5 +1,4 @@
-<div class="col-md-4">
-
+<div>
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -21,7 +20,7 @@
             @error('form.password') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
         <div class="d-flex align-items-center gap-3">
-            <button type="submit" class="btn btn-primary my-2">Добавить</button>
+            <button type="submit" data-bs-dismiss="modal" class="btn btn-primary my-2">Добавить</button>
             <div class="spinner-border text-primary" role="status" wire:loading wire:target="addUser">
                 <span class="visually-hidden">Loading...</span>
             </div>
