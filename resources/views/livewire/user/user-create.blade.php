@@ -19,11 +19,36 @@
             <input type="password" class="form-control @error('form.password') is-invalid @enderror" wire:model.blur="form.password" wire:keydown.enter="addUser" placeholder="Пароль">
             @error('form.password') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
+
+        <div class="mb-3">
+        <select class="select2 form-select @error('form.country_id') is-invalid @enderror" wire:model="form.country_id">
+            <option selected>Выбери страну</option>
+            @foreach ($countries as $country)
+            <option value="{{ $country->id }}">{{ $country->name }}</option>
+            @endforeach
+        </select>
+        @error('form.country_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
+        </div>
+
         <div class="d-flex align-items-center gap-3">
-            <button type="submit" data-bs-dismiss="modal" class="btn btn-primary my-2">Добавить</button>
+            <button type="submit" class="btn btn-primary my-2">Добавить</button>
             <div class="spinner-border text-primary" role="status" wire:loading wire:target="addUser">
                 <span class="visually-hidden">Loading...</span>
             </div>
         </div>
         </form>
 </div>
+
+@script
+<script>
+    $(document).ready(function() {
+        let select2 = $('.select2');
+        select2.select2();
+        select2.on('change', function (e) {
+            console.log($(this).val());
+            $wire.form.country_id = $(this).val();
+            // $wire.set('form.country_id', $(this).val());
+        });
+    });
+</script>
+@endscript
