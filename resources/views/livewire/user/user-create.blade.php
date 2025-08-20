@@ -21,13 +21,16 @@
         </div>
 
         <div class="mb-3">
-        <select class="select2 form-select @error('form.country_id') is-invalid @enderror" wire:model="form.country_id">
-            <option selected>Выбери страну</option>
-            @foreach ($countries as $country)
-            <option value="{{ $country->id }}">{{ $country->name }}</option>
-            @endforeach
-        </select>
-        @error('form.country_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
+            <div wire:ignore>
+                <select class="select2 form-select @error('form.country_id') is-invalid @enderror" wire:model="form.country_id">
+                    <option selected>Выбери страну</option>
+                    @foreach ($countries as $country)
+                    <option value="{{ $country->id }}">{{ $country->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        
+        @error('form.country_id') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
         </div>
 
         <div class="d-flex align-items-center gap-3">
@@ -49,6 +52,9 @@
             $wire.form.country_id = $(this).val();
             // $wire.set('form.country_id', $(this).val());
         });
+        $wire.on('user-created', () => {
+            select2.val('Выбери страну').trigger('change');
+        })
     });
 </script>
 @endscript
