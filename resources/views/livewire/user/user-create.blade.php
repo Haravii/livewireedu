@@ -33,6 +33,21 @@
         @error('form.country_id') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
         </div>
 
+        <div class="mb-3">
+            <input type="file" class="form-control @error('form.avatar') is-invalid @enderror" wire:model.blur="form.avatar" wire:keydown.enter="addUser">
+            @error('form.avatar') <div class="invalid-feedback">{{ $message }}</div> @enderror
+
+            <div wire:loading wire:target="form.avatar">Загрузка изображения...
+                <div class="mt-2 spinner-border text-primary" role="status"></div>
+            </div> 
+
+            @if (!$errors->has('form.avatar') && $form->avatar)
+                <img src="{{ $form->avatar->temporaryUrl() }}" height="100">
+            @endif
+        </div>
+
+        
+
         <div class="d-flex align-items-center gap-3">
             <button type="submit" class="btn btn-primary my-2">Добавить</button>
             <div class="spinner-border text-primary" role="status" wire:loading wire:target="addUser">
@@ -48,9 +63,7 @@
         let select2 = $('.select2');
         select2.select2();
         select2.on('change', function (e) {
-            console.log($(this).val());
             $wire.form.country_id = $(this).val();
-            // $wire.set('form.country_id', $(this).val());
         });
         $wire.on('user-created', () => {
             select2.val('Выбери страну').trigger('change');
