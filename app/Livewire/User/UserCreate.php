@@ -4,6 +4,7 @@ namespace App\Livewire\User;
 
 use App\Livewire\Forms\UserForm;
 use App\Models\Country;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -19,6 +20,7 @@ class UserCreate extends Component
         $this->dispatch('user-created');
     }
 
+    #[Layout('components.layouts.main')]
     public function render()
     {
         return view('livewire.user.user-create', [

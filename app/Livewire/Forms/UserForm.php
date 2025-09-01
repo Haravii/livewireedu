@@ -21,6 +21,8 @@ class UserForm extends Form
 
         #[Validate('nullable|image|extensions:jpg,jpeg,png|max:2048')]
         public $avatar;
+        
+        
 
         protected function rules(): array
         {
