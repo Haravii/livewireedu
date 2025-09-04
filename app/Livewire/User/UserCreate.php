@@ -18,6 +18,7 @@ class UserCreate extends Component
     {
         $user = $this->form->saveUser();
         $this->dispatch('user-created');
+        $this->redirectRoute('home', navigate: true);
     }
 
     #[Layout('components.layouts.main')]

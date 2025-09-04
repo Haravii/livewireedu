@@ -8,10 +8,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route("home") }}">Home</a>
+                    <a class="nav-link" wire:current.strict="active" wire:navigate aria-current="page" href="{{ route("home") }}">Home</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('create-user') }}">Добавить пользователя</a>
+                    <a class="nav-link" wire:current.strict="active" wire:navigate aria-current="page" href="{{ route('create-user') }}">Добавить пользователя</a>
                     </li>
                 </ul>
                 </div>
