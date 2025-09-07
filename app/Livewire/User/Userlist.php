@@ -68,7 +68,7 @@ class Userlist extends Component
             {
                 $query->whereAny([
                     'users.name', 'users.email', 'countries.name'
-                ], 'like', $this->search);
+                ], 'like', '%'.$this->search.'%');
             })
             ->orderBy('id', 'desc')
             ->paginate($this->limit);
