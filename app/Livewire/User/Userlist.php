@@ -22,6 +22,28 @@ class Userlist extends Component
     #[Url]
     public string $search = '';
 
+    public string $orderByField = 'users.id';
+    public string $orderByDirection = 'desc';
+
+    public array $orderByFieldList = [
+        'users.id' => 'ID',
+        'users.name' => 'Имя',
+        'users.email' => 'Email',
+        'countries.name' => 'Страна'
+    ];
+
+    public function changeOrder($field)
+    {
+        if($this->orderByField == $field)
+        {
+            $this->orderByDirection = $this->orderByDirection == 'asc' ? 'desc' : 'asc';
+            return;
+        }
+
+        $this->orderByField = $this->orderByFieldList[$field] ? $field : 'users.id';
+        $this->orderByDirection = 'asc';
+    }
+
      public function mount()
     {
         if (!in_array($this->limit, $this->limitList)) {
@@ -70,7 +92,7 @@ class Userlist extends Component
                     'users.name', 'users.email', 'countries.name'
                 ], 'like', '%'.$this->search.'%');
             })
-            ->orderBy('id', 'desc')
+            ->orderBy($this->orderByField, $this->orderByDirection)
             ->paginate($this->limit);
         return view('livewire.user.userlist')-> with([
             'users' => $users,

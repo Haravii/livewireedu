@@ -30,10 +30,18 @@
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Имя</th>
-                    <th>Email</th>
-                    <th>Страна</th>
+                    <th wire:click="changeOrder('users.id')" style="cursor: pointer">
+                    <x-sort-arrows fieldName="ID" :orderByField="$orderByField" :orderByDirection="$orderByDirection" :orderByFieldList="$orderByFieldList"/>
+                    </th>
+                    <th wire:click="changeOrder('users.name')" style="cursor: pointer">
+                        <x-sort-arrows fieldName="Имя" :orderByField="$orderByField" :orderByDirection="$orderByDirection" :orderByFieldList="$orderByFieldList"/>
+                    </th>
+                    <th wire:click="changeOrder('users.email')" style="cursor: pointer">
+                        <x-sort-arrows fieldName="Email" :orderByField="$orderByField" :orderByDirection="$orderByDirection" :orderByFieldList="$orderByFieldList"/>
+                    </th>
+                    <th wire:click="changeOrder('countries.name')" style="cursor: pointer">
+                        <x-sort-arrows fieldName="Страна" :orderByField="$orderByField" :orderByDirection="$orderByDirection" :orderByFieldList="$orderByFieldList"/>
+                    </th>
                     <th>Удалить</th>
                 </tr>
             </thead>
