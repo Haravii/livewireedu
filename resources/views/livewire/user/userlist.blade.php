@@ -42,6 +42,12 @@
                     <th wire:click="changeOrder('countries.name')" style="cursor: pointer">
                         <x-sort-arrows fieldName="Страна" :orderByField="$orderByField" :orderByDirection="$orderByDirection" :orderByFieldList="$orderByFieldList"/>
                     </th>
+                    <th wire:click="changeOrder('cities.name')" style="cursor: pointer">
+                        <x-sort-arrows fieldName="Город" :orderByField="$orderByField" :orderByDirection="$orderByDirection" :orderByFieldList="$orderByFieldList"/>
+                    </th>
+                    <th wire:click="changeOrder('streets.name')" style="cursor: pointer">
+                        <x-sort-arrows fieldName="Улица" :orderByField="$orderByField" :orderByDirection="$orderByDirection" :orderByFieldList="$orderByFieldList"/>
+                    </th>
                     <th>Удалить</th>
                 </tr>
             </thead>
@@ -52,6 +58,8 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->country_name }}</td>
+                        <td>{{ $user->city_name }}</td>
+                        <td>{{ $user->street_name }}</td>
                         <td><button wire:click="deleteUser({{ $user->id }})" wire:confirm="Удалить?" class="btn btn-danger">Удалить</button></td>
                     </tr>
                 @endforeach

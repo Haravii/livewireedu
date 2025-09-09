@@ -14,6 +14,7 @@ class UserCreate extends Component
 {
 
     use WithFileUploads;
+    
     public UserForm $form;  
 
     public $countries = [];
@@ -58,6 +59,7 @@ class UserCreate extends Component
         $user = $this->form->saveUser();
         $this->dispatch('user-created');
         $this->redirectRoute('home', navigate: true);
+   
     }
 
     #[Layout('components.layouts.main')]

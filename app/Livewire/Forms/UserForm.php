@@ -41,12 +41,14 @@ class UserForm extends Form
     public function saveUser()
     {
         $validated = $this->validate();
-        dd($validated);
+        $validated['city_id'] = !empty($validated['city_id']) ? (int) $validated['city_id'] : null;
+        $validated['street_id'] = !empty($validated['street_id']) ? (int) $validated['street_id'] : null;
         if($this->avatar)
         {
             $folders = date('Y') . '/' . date('m') . '/' . date('d');
             $validated['avatar'] = $this->avatar->store($folders);
         }
+        
 
         $user = User::create($validated);
         $this->reset();

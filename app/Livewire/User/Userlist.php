@@ -29,7 +29,9 @@ class Userlist extends Component
         'users.id' => 'ID',
         'users.name' => 'Имя',
         'users.email' => 'Email',
-        'countries.name' => 'Страна'
+        'countries.name' => 'Страна',
+        'cities.name' => 'Город',
+        'streets.name' => 'Улица'
     ];
 
     public function changeOrder($field)
@@ -65,7 +67,6 @@ class Userlist extends Component
         }
     }
     
-
     public function deleteUser(int $id)
     {
         User::find($id)->delete();
@@ -84,12 +85,15 @@ class Userlist extends Component
     public function render()
     {
         $users = User::query()
-        ->select('users.id', 'users.name', 'users.email', 'countries.name as country_name')
+        ->select('users.id', 'users.name', 'users.email', 'countries.name as country_name',
+         'cities.name as city_name', 'streets.name as street_name')
         ->join('countries', 'users.country_id', '=', 'countries.id')
+        ->join('cities', 'users.city_id', '=', 'cities.id')
+        ->join('streets', 'users.street_id', '=', 'streets.id')
         ->when($this->search, function ($query)
             {
                 $query->whereAny([
-                    'users.name', 'users.email', 'countries.name'
+                    'users.name', 'users.email', 'countries.name', 'cities.name', 'streets.name'
                 ], 'like', '%'.$this->search.'%');
             })
             ->orderBy($this->orderByField, $this->orderByDirection)
