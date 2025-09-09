@@ -1,6 +1,6 @@
 <div>
     {{ $fieldName }}
-    @if($orderByFieldList[$orderByField] != $fieldName)
+    @if($orderByFieldList[(string)$orderByField] != $fieldName)
     ⇵
     @elseif($orderByDirection == 'asc')
     🠗
