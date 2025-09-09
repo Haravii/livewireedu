@@ -14,7 +14,6 @@
     </head>
     <body>
         
-
         @include('incs.nav')
 
         <div class="container my-5">
