@@ -88,8 +88,8 @@ class Userlist extends Component
         ->select('users.id', 'users.name', 'users.email', 'countries.name as country_name',
          'cities.name as city_name', 'streets.name as street_name')
         ->join('countries', 'users.country_id', '=', 'countries.id')
-        ->join('cities', 'users.city_id', '=', 'cities.id')
-        ->join('streets', 'users.street_id', '=', 'streets.id')
+        ->leftJoin('cities', 'users.city_id', '=', 'cities.id')
+        ->leftJoin('streets', 'users.street_id', '=', 'streets.id')
         ->when($this->search, function ($query)
             {
                 $query->whereAny([
